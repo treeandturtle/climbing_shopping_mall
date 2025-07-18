@@ -19,7 +19,7 @@ class _NumberButtonState extends State<NumberButton> {
       height: 40,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey, width: 3),
+        border: Border.all(color: Colors.blueGrey, width: 3),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -32,6 +32,7 @@ class ProductListPage extends StatelessWidget {
               );
             },
           ),
+          SizedBox(width: 10),
         ],
       ),
       body: Stack(
@@ -50,7 +51,6 @@ class ProductListPage extends StatelessWidget {
                 final product = productList.products[index];
                 return LayoutBuilder(
                   builder: (context, constraints) {
-                    final double imageSize = constraints.maxWidth;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NameField extends StatelessWidget {
   final TextEditingController controller;
@@ -15,7 +16,7 @@ class NameField extends StatelessWidget {
           horizontal: 16,
           vertical: 14,
         ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
       validator: (v) =>
           (v == null || v.trim().isEmpty) ? '상품명을 입력해 주세요.' : null,
@@ -31,6 +32,7 @@ class PriceField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       decoration: InputDecoration(
         labelText: '가격',
         hintText: '숫자만 입력해 주세요',
@@ -40,7 +42,7 @@ class PriceField extends StatelessWidget {
           horizontal: 16,
           vertical: 14,
         ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
       validator: (v) {
         if (v == null || v.trim().isEmpty) return '가격을 입력해 주세요.';
@@ -60,14 +62,15 @@ class DescriptionField extends StatelessWidget {
       controller: controller,
       maxLines: 5,
       decoration: InputDecoration(
-        labelText: '상품 설명',
+        labelText: '상품 세부 설명',
+
         filled: true,
         fillColor: Colors.white,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,
         ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
       ),
       validator: (v) => (v == null || v.trim().isEmpty) ? '설명을 입력해 주세요.' : null,
     );

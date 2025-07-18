@@ -21,7 +21,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Grab it')),
+      appBar: AppBar(
+        title: const Text(
+          'Grab it',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -30,7 +36,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             Center(
               child: SizedBox(
                 width: 330,
-                height: 330,
+                height: 412,
                 child: widget.product.imageUrl.startsWith('http')
                     ? Image.network(widget.product.imageUrl, fit: BoxFit.fill)
                     : widget.product.imageUrl.startsWith('/')
@@ -58,7 +64,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 description: widget.product.description,
               ),
             ),
+
             const SizedBox(height: 24),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -74,8 +82,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                    backgroundColor: Colors.blueGrey,
                     foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onPressed: () {
                     if (number > 0) {

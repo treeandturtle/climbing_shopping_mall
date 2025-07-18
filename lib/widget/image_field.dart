@@ -10,19 +10,19 @@ class ImageField extends StatelessWidget {
     return GestureDetector(
       onTap: onPick,
       child: Container(
-        width: 200,
-        height: 200,
+        width: 264,
+        height: 330,
         decoration: BoxDecoration(
           color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.green, width: 2),
+
+          // border: Border.all(color: Colors.blueGrey, width: 2),
         ),
         child: imageUrl != null
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: imageUrl!.startsWith('http')
-                    ? Image.network(imageUrl!, fit: BoxFit.cover)
-                    : Image.file(File(imageUrl!), fit: BoxFit.cover),
+                    ? Image.network(imageUrl!, fit: BoxFit.fill)
+                    : Image.file(File(imageUrl!), fit: BoxFit.fill),
               )
             : const Icon(Icons.add_a_photo, size: 48, color: Colors.grey),
       ),

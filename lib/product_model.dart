@@ -12,6 +12,21 @@ class Product {
   });
 }
 
+class CartItem {
+  final Product product;
+  int number;
+
+  CartItem({required this.product, required this.number});
+}
+
+class Cart {
+  static final Cart instance = Cart._internal();
+
+  Cart._internal();
+
+  final List<CartItem> items = [];
+}
+
 class ProductList {
   static final ProductList instance = ProductList._internal();
 
@@ -79,4 +94,14 @@ class ProductList {
       description: "",
     ),
   ];
+
+  // 검색 기능 메서드
+  List<Product> searchProducts(String query) {
+    if (query.isEmpty) return products;
+
+    return products.where((product) {
+      return product.name.toLowerCase().contains(query.toLowerCase()) ||
+          product.description.toLowerCase().contains(query.toLowerCase());
+    }).toList();
+  }
 }

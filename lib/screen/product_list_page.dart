@@ -3,6 +3,9 @@ import 'package:intl/intl.dart';
 import '../product_model.dart';
 import '../screen/product_detail_page.dart';
 import '../screen/product_add_page.dart';
+import 'package:iconsax/iconsax.dart';
+import '../screen/cart_page.dart';
+import '../widget/product_search_delegate.dart';
 
 class ProductListPage extends StatelessWidget {
   final ProductList productList = ProductList.instance;
@@ -19,6 +22,17 @@ class ProductListPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Iconsax.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartPage()),
+              );
+            },
+          ),
+        ],
       ),
       body: Stack(
         children: [
@@ -98,7 +112,12 @@ class ProductListPage extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   heroTag: 'search',
-                  onPressed: () {},
+                  onPressed: () {
+                    showSearch(
+                      context: context,
+                      delegate: ProductSearchDelegate(productList.products),
+                    );
+                  },
                   shape: const CircleBorder(),
                   backgroundColor: Colors.grey[200],
                   child: Icon(Icons.search, size: 28),

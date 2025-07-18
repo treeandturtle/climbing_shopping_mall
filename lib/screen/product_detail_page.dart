@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import '../product_model.dart';
 import 'package:intl/intl.dart';
+import 'cart_page.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key, required this.product});
@@ -13,10 +14,10 @@ class ProductDetailPage extends StatefulWidget {
   State<ProductDetailPage> createState() => _ProductDetailPageState();
 }
 
-int totalPrice = 0;
-int number = 0;
-
 class _ProductDetailPageState extends State<ProductDetailPage> {
+  int number = 0;
+  int totalPrice = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,9 +63,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 NumberButton(
-                  onChanged: (number) {
+                  onChanged: (n) {
                     setState(() {
-                      number = number;
+                      number = n;
                       totalPrice = widget.product.price * number;
                     });
                   },
@@ -77,16 +78,54 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () {
-                    // TODO: 장바구니 담기 기능 구현
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('장바구니에 담았습니다.')),
-                    );
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const ProductAddPage(),
-                    //   ),
-                    // );
+                    if (number > 0) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            '${widget.product.name}을 ${number.toString()}개 구매하시겠습니까?',
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                '취소',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('장바구니에 담았습니다.'),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CartPage(
+                                      product: widget.product,
+                                      number: number,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                '확인',
+                                style: TextStyle(color: Colors.green),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('구매 수량을 입력해주세요.')),
+                      );
+                    }
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

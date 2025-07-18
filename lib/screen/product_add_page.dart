@@ -74,7 +74,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      appBar: AppBar(title: const Text('상품 등록'), leading: BackButton()),
+      appBar: AppBar(title: const Text('Grab it'), leading: BackButton()),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Form(

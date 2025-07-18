@@ -1,7 +1,9 @@
 import 'package:climbing_shopping_mall/widget/number_button.dart';
 import 'package:climbing_shopping_mall/widget/prduct_description_widget.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 import '../product_model.dart';
+import 'package:intl/intl.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key, required this.product});
@@ -25,9 +27,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: widget.product.imageUrl.startsWith('http')
-                  ? Image.network(widget.product.imageUrl, fit: BoxFit.fill)
-                  : Image.asset(widget.product.imageUrl, fit: BoxFit.fill),
+              child: SizedBox(
+                width: 330,
+                height: 330,
+                child: widget.product.imageUrl.startsWith('http')
+                    ? Image.network(widget.product.imageUrl, fit: BoxFit.fill)
+                    : widget.product.imageUrl.startsWith('/')
+                    ? Image.file(
+                        File(widget.product.imageUrl),
+                        fit: BoxFit.fill,
+                      )
+                    : Image.asset(widget.product.imageUrl, fit: BoxFit.fill),
+              ),
             ),
             const SizedBox(height: 16),
             Text(
@@ -36,9 +47,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             ),
             const SizedBox(height: 8),
             Text(
-              '${widget.product.price.toString()}원',
+              '${NumberFormat('#,###').format(widget.product.price)}원',
               style: const TextStyle(fontSize: 20, color: Colors.green),
             ),
+
             const SizedBox(height: 16),
             Expanded(
               child: ProductDescriptionWidget(

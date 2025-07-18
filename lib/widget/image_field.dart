@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class ImageField extends StatelessWidget {
   final String? imageUrl;
@@ -19,7 +20,9 @@ class ImageField extends StatelessWidget {
         child: imageUrl != null
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(imageUrl!, fit: BoxFit.cover),
+                child: imageUrl!.startsWith('http')
+                    ? Image.network(imageUrl!, fit: BoxFit.cover)
+                    : Image.file(File(imageUrl!), fit: BoxFit.cover),
               )
             : const Icon(Icons.add_a_photo, size: 48, color: Colors.grey),
       ),

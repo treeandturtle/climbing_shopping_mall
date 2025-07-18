@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import '../product_model.dart';
 import '../widget/image_field.dart';
 import '../widget/register_field.dart';
@@ -19,10 +20,15 @@ class _ProductAddPageState extends State<ProductAddPage> {
   final _descController = TextEditingController();
 
   //이미지 선택 추후에 수정 필요
-  void _pickImage() {
-    setState(() {
-      _imageUrl = 'https://picsum.photos/200/300';
-    });
+  void _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        _imageUrl = image.path; // 로컬 파일 경로 저장
+      });
+    }
   }
 
   // 제출시 예외에 해당하지 않으면 productList에 추가 후 메시지 출력

@@ -22,9 +22,20 @@ class _CartPageState extends State<CartPage> {
   void initState() {
     super.initState();
     if (widget.product != null && widget.number != null) {
-      cart.items.add(
-        CartItem(product: widget.product!, number: widget.number!),
+      final index = cart.items.indexWhere(
+        (item) => item.product.name == widget.product!.name,
       );
+      if (index != -1) {
+        setState(() {
+          cart.items[index].number += widget.number!;
+        });
+      } else {
+        setState(() {
+          cart.items.add(
+            CartItem(product: widget.product!, number: widget.number!),
+          );
+        });
+      }
     }
   }
 

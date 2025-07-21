@@ -38,13 +38,13 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 width: 330,
                 height: 412,
                 child: widget.product.imageUrl.startsWith('http')
-                    ? Image.network(widget.product.imageUrl, fit: BoxFit.fill)
+                    ? Image.network(widget.product.imageUrl, fit: BoxFit.cover)
                     : widget.product.imageUrl.startsWith('/')
                     ? Image.file(
                         File(widget.product.imageUrl),
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       )
-                    : Image.asset(widget.product.imageUrl, fit: BoxFit.fill),
+                    : Image.asset(widget.product.imageUrl, fit: BoxFit.cover),
               ),
             ),
             const SizedBox(height: 16),
@@ -55,7 +55,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             const SizedBox(height: 8),
             Text(
               '${NumberFormat('#,###').format(widget.product.price)}원',
-              style: const TextStyle(fontSize: 20, color: Colors.green),
+              style: const TextStyle(fontSize: 20, color: Colors.blueGrey),
             ),
 
             const SizedBox(height: 16),
@@ -126,7 +126,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                               },
                               child: Text(
                                 '확인',
-                                style: TextStyle(color: Colors.green),
+                                style: TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ],

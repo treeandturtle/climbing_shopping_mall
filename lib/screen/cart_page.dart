@@ -5,10 +5,12 @@ import '../product_model.dart';
 import '../widget/cart_item_tile.dart';
 import '../screen/product_list_page.dart';
 
+// 장바구니 페이지 이고 상품 목록 페이지에서 상품을 클릭하면 장바구니 페이지로 이동
 class CartPage extends StatefulWidget {
   final Product? product;
   final int? number;
-
+  // 상품 상세 목록 페이지에서 이동시는 상품 모델과 수량을 받아옴
+  // 그외 경우인 상품 목록 페이지에서는 받아오지 않음 그래서  nullable 타입으로 선언
   const CartPage({super.key, this.product, this.number});
 
   @override
@@ -21,6 +23,9 @@ class _CartPageState extends State<CartPage> {
   @override
   void initState() {
     super.initState();
+    // 유효한 상품(product)과 수량(number)이 전달된 경우:
+    // 이미 장바구니에 해당 상품이 있으면 수량만 증가시키고,
+    // 없으면 새 항목으로 추가함
     if (widget.product != null && widget.number != null) {
       final index = cart.items.indexWhere(
         (item) => item.product.name == widget.product!.name,
@@ -42,6 +47,7 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     int totalPrice = 0;
+    // 장바구니에 있는 상품의 총 가격을 계산
     for (int i = 0; i < cart.items.length; i++) {
       totalPrice += cart.items[i].product.price * cart.items[i].number;
     }
@@ -58,6 +64,8 @@ class _CartPageState extends State<CartPage> {
       body: Column(
         children: [
           Expanded(
+            // 장바구니에 상품이 없으면 장바구니가 비었습니다. 라는 텍스트를 표시
+            // 장바구니에 상품이 있으면 상품 목록을 표시
             child: cart.items.isEmpty
                 ? const Center(child: Text('장바구니가 비었습니다.'))
                 : ListView.builder(

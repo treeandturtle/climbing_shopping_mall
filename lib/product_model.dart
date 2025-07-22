@@ -1,3 +1,4 @@
+// 상품 모델이고 이름, 이미지, 가격, 설명 이렇게 4개의 필드를 가지고 있음
 class Product {
   final String name;
   final String imageUrl;
@@ -12,6 +13,7 @@ class Product {
   });
 }
 
+// 장바구니 물품 모델이고  상품, 수량 이렇게 2개의 필드를 가지고 있음
 class CartItem {
   final Product product;
   int number;
@@ -19,6 +21,7 @@ class CartItem {
   CartItem({required this.product, required this.number});
 }
 
+// 장바구니 모델이고 아이템 리스트를 가지고 있음 그리고 싱글턴 패턴으로 구현
 class Cart {
   static final Cart instance = Cart._internal();
 
@@ -27,6 +30,7 @@ class Cart {
   final List<CartItem> items = [];
 }
 
+// 상품 목록 모델이고 상품 리스트를 가지고 있음 그리고 싱글턴 패턴으로 구현
 class ProductList {
   static final ProductList instance = ProductList._internal();
 
@@ -96,6 +100,9 @@ class ProductList {
   ];
 
   // 검색 기능 메서드
+  // 검색어가 비어있으면 모든 상품을 반환하고 검색어가 있으면 검색어를 포함하는 상품을 반환
+  // 검색어 확인은 받아온 query를 소문자로 변환하고 상품 이름과 설명을 소문자로 변환하여 포함 여부를 확인
+  // 포함 여부는 where 메서드를 사용하여 확인
   List<Product> searchProducts(String query) {
     if (query.isEmpty) return products;
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../product_model.dart';
 
+// 장바구니 아이템 타일 이고 상품 이미지, 이름, 가격, 수량, 삭제 버튼을 표시
+//관련 로직은 콜백 함수를 사용하여 구현
 class CartItemTile extends StatelessWidget {
   final Product product;
   final int quantity;

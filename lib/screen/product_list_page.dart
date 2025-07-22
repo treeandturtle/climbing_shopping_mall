@@ -6,7 +6,9 @@ import '../screen/product_add_page.dart';
 import 'package:iconsax/iconsax.dart';
 import '../screen/cart_page.dart';
 import '../widget/product_search_delegate.dart';
+import 'dart:io';
 
+// 상품 목록 페이지 이고 상품 목록 페이지에서 상품 목록을 표시
 class ProductListPage extends StatelessWidget {
   final ProductList productList = ProductList.instance;
 
@@ -39,6 +41,7 @@ class ProductListPage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(4.0),
+            // 상품 목록을 그리드 뷰로 표시
             child: GridView.builder(
               itemCount: productList.products.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -49,6 +52,7 @@ class ProductListPage extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 final product = productList.products[index];
+
                 return LayoutBuilder(
                   builder: (context, constraints) {
                     return Column(
@@ -68,9 +72,10 @@ class ProductListPage extends StatelessWidget {
                           child: SizedBox(
                             width: double.infinity,
                             height: constraints.maxWidth * 4 / 3,
-                            child: product.imageUrl.startsWith('http')
-                                ? Image.network(
-                                    product.imageUrl,
+                            // 이미지 파일 경로 확인 후 이미지 표시
+                            child: product.imageUrl.startsWith('/')
+                                ? Image.file(
+                                    File(product.imageUrl),
                                     fit: BoxFit.cover,
                                   )
                                 : Image.asset(

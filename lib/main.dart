@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       themeMode: ThemeMode.system,
+      //사실상 첫 화면은 상품 목록 페이지
       home: ProductListPage(),
     );
   }

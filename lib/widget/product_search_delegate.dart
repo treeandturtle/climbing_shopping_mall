@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../product_model.dart';
 
+// 상품 검색 위젯 이고 상품 목록 페이지에서 상품 검색 버튼을 클릭하면 상품 검색 위젯으로 이동
 class ProductSearchDelegate extends SearchDelegate {
   final List<Product> products;
-
+  // 추상 클래스 SearchDelegate 를 상속받아 구현
+  //searchdelegate 는 검색 위젯을 구현하는 추상 클래스
+  //그것을 재정의 하여 상품 검색 위젯을 구현
   ProductSearchDelegate(this.products);
 
   @override

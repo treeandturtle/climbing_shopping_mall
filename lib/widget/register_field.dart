@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// 상품 등록 페이지에서 사용하는 텍스트 필드 위젯 이고 상품명, 가격, 설명 필드를 표시
+// 모두 기본적인 구현이여서 따로 설명은 하지 않겠습니다
 class NameField extends StatelessWidget {
   final TextEditingController controller;
   const NameField({super.key, required this.controller});

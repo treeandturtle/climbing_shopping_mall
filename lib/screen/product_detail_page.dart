@@ -6,6 +6,7 @@ import '../product_model.dart';
 import 'package:intl/intl.dart';
 import 'cart_page.dart';
 
+// 상품 상세 페이지 이고 상품 목록 페이지에서 상품을 클릭하면 상품 상세 페이지로 이동
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({super.key, required this.product});
   final Product product;
@@ -37,6 +38,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               child: SizedBox(
                 width: 330,
                 height: 412,
+                // 이미지 파일 경로 확인 후 이미지 표시
+                // 이미지 파일 경로가 http로 시작하면 웹 이미지 표시
+                //(지금은 사용하지는 않지만 이전에는 웹페이지 링크로 상품 이미지를 추가함)
+                // 이미지 파일 경로가 /로 시작하면 로컬 이미지 표시
+                // 이미지 파일 경로가 그 외의 경우는 애셋 이미지 표시
                 child: widget.product.imageUrl.startsWith('http')
                     ? Image.network(widget.product.imageUrl, fit: BoxFit.cover)
                     : widget.product.imageUrl.startsWith('/')
